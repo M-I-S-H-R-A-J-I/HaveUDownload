@@ -98,9 +98,6 @@ header a:hover{
   font-size:20px;
 }
 /* Boxes */
-#boxes{
-  margin-top:20px;
-}
 
 #boxes .box{
   float:left;
@@ -134,8 +131,8 @@ article#main-col{
 footer{
   padding:20px;
   margin-top:20px;
-  color:powderblue;
-  background-color:#EBB22C;
+  color:white;
+  background-color:black;
   text-align: center;
 }
 
