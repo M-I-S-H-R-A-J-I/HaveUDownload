@@ -128,7 +128,7 @@ article#main-col{
   width:65%;
 }
 
-footer{
+footer{ border-top:2px dotted #ff0000;
   padding:20px;
   color:#ffffff;
   background-color:#000000;
