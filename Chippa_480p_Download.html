@@ -1,0 +1,336 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>Direct Download File</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="https://veryfastdownload.pw/dist/css/normalize.css">
+    <link rel="stylesheet" href="https://veryfastdownload.pw/dist/css/main.css">
+  <script>
+								function openInNewTab(urls) {
+								  var win = window.open(urls, '_blank');
+								  win.focus();
+								  win.onload = function() {
+								  win.close();
+								}
+								} 
+							  </script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-57136585-22"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-57136585-22');
+</script>
+
+
+
+    <style>
+        .container{
+            width: 100%;
+            margin: 0 auto;
+        }
+        .ads_div1{
+            text-align: center;
+        }
+        .header_div {
+            margin: 0 auto;
+            width: auto;
+            text-align: center;
+            font-size: 25px;
+            padding: 15px;
+            background: orange;
+        }
+        .player_div {
+            width: 71%;
+            margin: 0 auto;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: auto;
+        }
+        .click_button {
+            text-align: center;
+            padding: 20px;
+            font-size: 27px;
+        }
+        .go_button {
+            width: 575px;
+            margin: 0 auto;
+            border: 2px solid #32CD32;
+            background: #32CD32;
+            border-radius: 12px;
+            font-size: 26px;
+            padding: 11px;
+            font-family: arial;
+        }
+        a, a:active {
+            text-decoration: none;
+            color: white;
+        }
+
+
+        video::-webkit-media-controls-timeline {
+            display: none;
+        }
+
+        .skip_button {
+            border: 1px solid #fff;
+            border-right: none;
+            background-color: #000;
+            opacity: .5;
+            position: absolute;
+            color: #fff;
+            font-weight: 600;
+            width: auto;
+            position: absolute;
+            right: 0%;
+            bottom: 20%;
+            padding: 10px 20px;
+            cursor: pointer;
+            min-width: 80px;
+            font-size: 22px;
+            display: none;
+            position:absolute;
+        }
+
+        .playpause {
+            background-repeat:no-repeat;
+            width:20%;
+            height:20%;
+            position:absolute;
+            left:0%;
+            right:0%;
+            top:0%;
+            bottom:0%;
+            margin:auto;
+            background-size:contain;
+            background-position: center;
+        }
+
+
+        #video_block{
+            margin: 0 auto;
+            position:relative;
+            padding:0;
+        }
+
+        #videoAd{
+            width:100%;
+            display: block;
+        }
+
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .player_div {
+                width: 88%;
+            }
+            .go_button {
+                width: auto;
+            }
+            .header_div {
+                font-size: 18px;
+            }
+
+        }
+		.addddd{
+			text-align: center;
+		}
+
+    </style>
+
+    <script type="text/javascript">
+        function onReady(){
+            var videoTag = document.getElementById('videoAd');
+            var videoBlock = document.getElementById('video_block');
+            var impression = videoBlock.getAttribute('data-impression');
+            var clickUrl = videoBlock.getAttribute('data-url');
+            var skipButton = document.querySelector('.skip_button');
+            var skipText = document.createElement("span");
+            var isMobile = detectMob();
+            var playButton = document.querySelector('.playpause');
+
+
+
+
+            const playPromise = videoTag.play() || Promise.reject('');
+            playPromise.then(() => {
+            }).catch(err => {
+                videoTag.muted = true;
+            videoTag.play();
+        });
+
+
+
+            //start playing
+            videoTag.addEventListener('play', function(e){
+                if(this.currentTime == 0){
+                    if(impression){
+                        var img_2 = new Image();
+                        img_2.src = impression;
+                    }
+                }
+            });
+
+            // skip button
+            videoTag.addEventListener("timeupdate", function (ev) {
+                if(Math.round(ev.target.currentTime)>0 && Math.round(ev.target.currentTime)<11){
+                    skipText.innerHTML = 11 - Math.round(ev.target.currentTime);
+                    skipButton.appendChild(skipText);
+                    skipButton.style.display = 'block';
+                }else if(Math.round(ev.target.currentTime)>10){
+                    skipText.innerHTML = "Skip &#187;";
+                    skipButton.appendChild(skipText);
+                    skipButton.style.display = 'block';
+
+                    // пропустить рекламу
+                    skipButton.addEventListener('click', skipFunction);
+                }
+            });
+
+            // open adv link
+            if(isMobile){
+                videoTag.addEventListener('click', function(e){
+                    let url = clickUrl;
+                    window.open(url, '_blank');
+                    videoTag.pause();
+                });
+            }else{
+                videoTag.addEventListener('pause', function(e){
+                    if(this.currentTime > 0 && this.readyState > 2){
+                        let url = clickUrl;
+                        window.open(url, '_blank');
+
+                        if(!isMobile){
+                            playButton.style.display = 'block';
+                        }
+
+                    }
+                });
+            }
+            // hide play button if firefox
+            if( navigator.userAgent.indexOf("Firefox") != -1 || isMobile ){
+                playButton.style.display = 'none';
+            }
+
+
+            // click play button
+            playButton.addEventListener('click', function(e){
+                videoTag.play();
+                this.style.display = 'none';
+                e.stopPropagation();
+            });
+
+
+
+
+
+            function detectMob() {
+                const toMatch = [
+                    /Android/i,
+                    /webOS/i,
+                    /iPhone/i,
+                    /iPad/i,
+                    /iPod/i,
+                    /BlackBerry/i,
+                    /Windows Phone/i
+                ];
+
+                return toMatch.some((toMatchItem) => {
+                    return navigator.userAgent.match(toMatchItem);
+            });
+            }
+
+            var skipFunction = function(e) {
+                videoBlock.remove();
+            };
+
+        }
+
+
+        if (document.readyState !== "loading") {
+            onReady();
+        } else {
+            document.addEventListener("DOMContentLoaded", onReady);
+        }
+
+
+        function countDown(sec, elem) {
+            var intervalId = undefined;
+            var skipButton_t = document.querySelector('.go_button');
+            var intervalId = setInterval(function(){
+                var element = document.getElementById(elem);
+                element.innerHTML = "Please Wait : " + sec + " seconds";
+
+                if (sec < 1) {
+                    clearInterval(intervalId);
+                    element.innerHTML = '<div class="go_button"><a href="https://m-i-s-h-r-a-j-i.github.io/HaveUDownload/" onclick="openInNewTab(\'https://video-downloads.googleusercontent.com/AGQNM9KwI-_cwsGL74xo6CTfyw2GwEuXr_bisD9lMkhhOdRgfpHc-jY874laxtVIAFoo6i-05eRwfrOWHigkQeO1-UcQ_D59iyIJCYwnu8UROF0Odz4ziCuiiplbWLOtliJhPdIrjmYm4MIWpqhufpDg3Z7Tdtat1ov_p2WPGQ7hnEyqaT2crbobNhd-nZodbWV1TIUAa3dWiIlke9gdcfYQuhPKDT_0PuqyikxzMGttRCaTx4-Q70fwPGC-K9uuTcL5NtMyDXa2\');">Download Now</a></div>';
+                    skipButton_t.style.display = 'block';
+                }
+
+                sec--;
+            }, 1000);
+        }
+
+        countDown(5, "status");
+    </script>
+
+
+
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+    <div class="container">
+
+
+    <div class="header_div">
+
+           Wait, While We Generate Direct Download Link!    </div>
+
+
+
+
+    <div class="click_button">
+        <div id="status"></div>
+    </div>
+    
+    
+    <!--<div class="player_div">
+        <div id="video_block" data-url="" data-impression="">
+            <p class="adblock_detect" style="display: none;">Please Disable Adblocker or Allow Pop-up <br> and Reload Page</p>
+            <p class="adblock_nodetect" style="display: none;">Watch Video or Skip To Get Download links</p>
+            <video id="videoAd" width="600" height="auto"  controls="controls" data-origwidth="0" data-origheight="0"><source src="">
+            </video>
+            <div class="skip_button"></div>
+            <div class="skip_button"></div>
+        </div>
+    </div> -->
+
+</div>
+
+
+<script src="https://veryfastdownload.pw/dist/js/vendor/modernizr-3.11.2.min.js"></script>
+<script src="https://veryfastdownload.pw/dist/js/plugins.js"></script>
+
+</body>
+
+</html>
