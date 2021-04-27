@@ -102,12 +102,12 @@ header a:hover{
 #boxes .box{
   float:left;
   text-align: center;
-  width:40%;
+  width:60%;
   padding:10px;
 }
 
 #boxes .box img{
-  width:90px;
+  width:100px;
 }
 
 /* Sidebar */
@@ -125,7 +125,7 @@ aside#sidebar .quote input, aside#sidebar .quote textarea{
 /* Main-col */
 article#main-col{
   float:left;
-  width:65%;
+  width:70%;
 }
 
 footer{ border-top:2px dotted #ff0000;
