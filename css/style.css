@@ -118,14 +118,14 @@ aside#sidebar{
 }
 
 aside#sidebar .quote input, aside#sidebar .quote textarea{
-  width:80%;
+  width:90%;
   padding:5px;
 }
 
 /* Main-col */
 article#main-col{
   float:left;
-  width:70%;
+  width:80%;
 }
 
 footer{ border-top:2px dotted #ff0000;
